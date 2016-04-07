@@ -21,4 +21,6 @@ class CreateUsers extends AbstractMigration
 
 
     }
+
+
 }
