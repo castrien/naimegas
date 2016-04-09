@@ -9,6 +9,7 @@
 namespace App\Model\Table;
 use Cake\Database\Query;
 use Cake\ORM\Table;
+use Cake\ORM\TableRegistry;
 
 
 class ClientsTable extends Table
@@ -17,15 +18,12 @@ class ClientsTable extends Table
         $this->addBehavior('Timestamp');
     }
 
-    public function findClient(Query $query, array $options){
-        $fields = [
-            'Clients.nome',
-            'Clients.cpf',
-        ];
-        return $this->find()
-            ->distinct($fields)
-            ->matching(['Tags', function ($q) use ($options){
-            return $q->where(['Tags.nome IN' => $options['tags']]);
-        });
+/*    public  function queryClients(){
+        $query = TableRegistry::get('Clients')->find();
+
+        foreach ($query as $client){
+            debug($this->Clients->nome);
+        }
+    } */
+
     }
-}

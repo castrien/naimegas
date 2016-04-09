@@ -18,27 +18,46 @@ class ClientsController extends AppController
         return parent::isAuthorized($user);
     }
 
-   // public function index(){
-    //    $this->set('clients',$this->paginate($this->Clients));
-  //  }
+    public function show($clients=array()){
+        debug($clients);
+        $this->set('clients',$this->paginate($this->Clients));
+    }
 
     public function index(){
 
     }
 
-    //public function view($id = null){
-     //   $clients = $this->Clients->get($id);
-      //  $this->set('client',$clients);
-  //  }
-
-    public function query($){
-        $clients = $this->Clients->find()
+    public function view($id = null){
+        $clients = $this->Clients->get($id);
+        $this->set('client',$clients);
     }
 
-    public function view(){
-        $clients = $this->Clients->find('all');
-        $this->set(compact('clients'));
+    public function query(){
+        $query = $this->Clients->find();
+   // }
+   // {
+        if ($this->request->is(['post','put'])) {
+            foreach ($query as $client) {
+                if ($client->nome == $this->request->data(['nome'])) {
+                    return $this->redirect(['action' => 'view',$client->id]);
+                }
+            }
+
+
+        }
+
+        //    }
+
+     //   }
+     //   else {
+        //    echo 2;
+
     }
+
+   // public function view(){
+     //   $clients = $this->Clients->find('all');
+     //   $this->set(compact('clients'));
+   // }
 
     public function edit($id= null){
         $client = $this->Clients->get($id);
