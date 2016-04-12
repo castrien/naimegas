@@ -9,6 +9,8 @@
 namespace App\Controller;
 
 
+use App\Model\Table\ClientsTable;
+
 class ClientsController extends AppController
 {
     public function isAuthorized($user){
@@ -18,9 +20,15 @@ class ClientsController extends AppController
         return parent::isAuthorized($user);
     }
 
-    public function show($clients=array()){
-        debug($clients);
-        $this->set('clients',$this->paginate($this->Clients));
+    public function show($nome){
+        debug($nome);
+        $this->paginate = [
+            'conditions' => [
+                'Clients.nome LIKE ' => $nome,
+            ]
+        ];
+
+        $this->set('clients', $this->paginate($this->Clients));
     }
 
     public function index(){
@@ -33,31 +41,13 @@ class ClientsController extends AppController
     }
 
     public function query(){
-        $query = $this->Clients->find();
-   // }
-   // {
         if ($this->request->is(['post','put'])) {
-            foreach ($query as $client) {
-                if ($client->nome == $this->request->data(['nome'])) {
-                    return $this->redirect(['action' => 'view',$client->id]);
-                }
-            }
 
-
+            return $this->redirect(['action' => 'show', $this->request->data(['nome'])]);
         }
-
-        //    }
-
-     //   }
-     //   else {
-        //    echo 2;
 
     }
 
-   // public function view(){
-     //   $clients = $this->Clients->find('all');
-     //   $this->set(compact('clients'));
-   // }
 
     public function edit($id= null){
         $client = $this->Clients->get($id);
