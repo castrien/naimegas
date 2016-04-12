@@ -24,7 +24,7 @@ class ClientsController extends AppController
         debug($nome);
         $this->paginate = [
             'conditions' => [
-                'Clients.nome LIKE ' => $nome,
+                'Clients.nome LIKE ' => '%'.$nome.'%',
             ]
         ];
 
