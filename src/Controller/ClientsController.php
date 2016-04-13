@@ -76,6 +76,16 @@ class ClientsController extends AppController
 
     }
 
+    public function delete($id=null){
+        $this->request->allowMethod(['post','delete']);
+
+        $client = $this->Clients->get($id);
+        if ($this->Clients->delete($client)){
+            $this->Flash->success(__('O cliente com o nome: {0} foi deletado!', h($client->nome)));
+            return $this->redirect(['action' => 'index']);
+        }
+    }
+
     public function logout(){
         $this->Flash->success('Voce se desconectou"');
         return $this->redirect($this->Auth->logout());

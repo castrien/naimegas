@@ -2,7 +2,7 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('Cadastrar Cliente'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('Encontrar Cliente'), ['action' => 'view']) ?></li>
+        <li><?= $this->Html->link(__('Encontrar Cliente'), ['action' => 'query']) ?></li>
     </ul>
 </nav>
 <div class="clients index large-9 medium-8 columns content">
@@ -29,7 +29,7 @@
             <td class="actions">
                 <?= $this->Html->link(__('View'), ['action' => 'view', $client->id]) ?>
                 <?= $this->Html->link(__('Edit'), ['action' => 'edit', $client->id]) ?>
-                <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $client->id], ['confirm' => __('Are you sure you want to delete # {0}?', $client->id)]) ?>
+                <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $client->id], ['confirm' => __('Tem certeza que quer deletar o cliente: {0}?', $client->nome)]) ?>
             </td>
         </tr>
         <?php endforeach; ?>

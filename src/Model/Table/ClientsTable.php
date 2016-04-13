@@ -18,15 +18,4 @@ class ClientsTable extends Table
         $this->addBehavior('Timestamp');
     }
 
-    public  function queryClients(){
-        $query = TableRegistry::get('Clients')->find();
-
-        foreach ($query as $client){
-           // if($client->nome == $this->request->data(['nome'])){
-                debug($this->request->data(['nome']));
-            }
-        }
-      //  }
-   // }
-
     }

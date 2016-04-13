@@ -1,7 +1,7 @@
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List Clients'), ['action' => 'index']) ?></li>
+        <li class="heading"><?= __('Ações') ?></li>
+        <li><?= $this->Html->link(__('Menu Principal'), ['action' => 'index']) ?></li>
     </ul>
 </nav>
 <div class="clients form large-9 medium-8 columns content">
