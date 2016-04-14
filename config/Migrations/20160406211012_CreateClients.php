@@ -13,12 +13,12 @@ class CreateClients extends AbstractMigration
     public function change()
     {
         $table = $this->table('clients');
-        $table->addColumn('cpf','string', ['null' => false, 'limit' => 11,])
-            ->addColumn('rg','string', ['null' => false,'limit' => 10,])
-            ->addColumn('nome','string', ['null' => false,])
+        $table->addColumn('cpf','string', ['null' => false, 'limit' => 11,'type' => 'unique'])
+            ->addColumn('rg','string', ['null' => false,'limit' => 10,'type' => 'unique'])
+            ->addColumn('nome','string', ['null' => false,'type' => 'unique'])
             ->addColumn('endereco','string', ['null' => false,])
             ->addColumn('dt_nasc','date', ['null' => false,])
-            ->addColumn('email','string', ['null' => true,])
+            ->addColumn('email','string', ['null' => true,'type' => 'unique'])
             ->addColumn('telefone1','string', ['null' => false,'limit' => 9,])
             ->addColumn('telefone2','string', ['null' => true,'limit' => 9,])
             ->addColumn('created','datetime',[ 'null' => false,])

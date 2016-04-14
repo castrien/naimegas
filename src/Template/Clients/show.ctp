@@ -29,6 +29,7 @@
             <td class="actions">
                 <?= $this->Html->link(__('View'), ['action' => 'view', $client->id]) ?>
                 <?= $this->Html->link(__('Edit'), ['action' => 'edit', $client->id]) ?>
+                <?= $this->Html->link(__('Agendar'), ['controller' => 'Schedules', 'action' => 'agendar', $client->id]) ?>
                 <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $client->id], ['confirm' => __('Tem certeza que quer deletar o cliente: {0}?', $client->nome)]) ?>
             </td>
         </tr>
