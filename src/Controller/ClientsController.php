@@ -50,39 +50,37 @@ class ClientsController extends AppController
 
 
     public function edit($id= null){
-        $client = $this->Clients->get($id);
+      //  $client = $this->Clients->get($id);
         if($this->request->is(['post','put'])){
-            $this->Clients->patchEntity($client, $this->request->data);
-            if ($this->Clients->save($client)){
+            if (ClientsTable::edit($id, $this->request->data)){
                 $this->Flash->success(__('Cadastro de cliente atualizado!'));
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('Cliente não pôde ser atualizado'));
         }
-        $this->set('client',$client);
+     //   $this->set('client',$client);
     }
 
     public function add(){
-        $client = $this->Clients->newEntity();
+      //  $client = $this->Clients->newEntity();
         if ($this->request->is('post')){
-            $client = $this->Clients->patchEntity($client, $this->request->data);
-            if ($this->Clients->save($client)){
+            if(ClientsTable::add($this->request->data)){
                 $this->Flash->success(__('Cliente Cadastro com Sucesso!'));
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('Não foi possivel incluir o cliente!'));
         }
-        $this->set('client',$client);
-
+            else {
+                $this->Flash->error(__('Não foi possivel incluir o cliente!'));
+            }
     }
-
+      //  $this->set('client',$client);
+    }
     public function delete($id=null){
         $this->request->allowMethod(['post','delete']);
-
-        $client = $this->Clients->get($id);
-        if ($this->Clients->delete($client)){
-            $this->Flash->success(__('O cliente com o nome: {0} foi deletado!', h($client->nome)));
-            return $this->redirect(['action' => 'index']);
+        if (ClientsTable::del($id)){
+            $this->Flash->success(__('O cliente foi deletado!'));
+            return $this->redirect(['action' => 'query']);
+        }
+        else{
+            $this->Flash->error(__('Não foi possivel deletar o cliente!'));
         }
     }
 
