@@ -9,6 +9,8 @@
 namespace App\Controller;
 
 
+use App\Model\Table\SchedulesTable;
+
 class SchedulesController extends AppController
 {
     public function isAuthorized($user){
@@ -19,15 +21,29 @@ class SchedulesController extends AppController
     }
 
     public function agendar($id){
-        $schedule = $this->Schedules->newEntity();
         if($this->request->is(['post'])) {
-            $schedule = $this->Schedules->patchEntity($schedule, $this->request->data);
-            if($this->Schedules->save($schedule)){
+            if($schedule = SchedulesTable::agendar($this->request->data)){
                 $this->Flash->success(__('Horário Agendado'));
                 return $this->redirect(['controller' => 'markings','action' => 'att',$id,$schedule->id]);
             }
         }
 
-        $this->set('schedule',$schedule);
+       // $this->set('schedule',$schedule);
+    }
+
+
+    public function display(){
+    /*    $this->paginate = [
+            'conditions' => [
+                'Clients.nome LIKE ' => '%'.$nome.'%',
+            ]
+        ]; */
+
+        $this->set('schedules', $this->paginate($this->Schedules));
+    }
+
+    public function aux(){
+        $this->loadModel('Markings');
+
     }
 }

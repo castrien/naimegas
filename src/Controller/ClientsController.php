@@ -56,7 +56,8 @@ class ClientsController extends AppController
                 $this->Flash->success(__('Cadastro de cliente atualizado!'));
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('Cliente não pôde ser atualizado'));
+            else
+                $this->Flash->error(__('Cliente não pôde ser atualizado'));
         }
      //   $this->set('client',$client);
     }
@@ -66,10 +67,11 @@ class ClientsController extends AppController
         if ($this->request->is('post')){
             if(ClientsTable::add($this->request->data)){
                 $this->Flash->success(__('Cliente Cadastro com Sucesso!'));
+                return $this->redirect(['action' => 'query']);
         }
-            else {
+            else
                 $this->Flash->error(__('Não foi possivel incluir o cliente!'));
-            }
+
     }
       //  $this->set('client',$client);
     }
@@ -79,9 +81,9 @@ class ClientsController extends AppController
             $this->Flash->success(__('O cliente foi deletado!'));
             return $this->redirect(['action' => 'query']);
         }
-        else{
+        else
             $this->Flash->error(__('Não foi possivel deletar o cliente!'));
-        }
+
     }
 
     public function logout(){

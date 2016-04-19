@@ -9,6 +9,8 @@
 namespace App\Controller;
 
 
+use App\Model\Table\MarkingsTable;
+
 class MarkingsController extends AppController
 {
     public function isAuthorized($user){
@@ -20,8 +22,15 @@ class MarkingsController extends AppController
 
     public function att($idc, $ids){
         debug('id_client = '.$idc.'     id_schedule = '. $ids);
-        $marking = $this->Markings->newEntity(['client_id' => $idc, 'schedule_id' => $ids]);
-        $this->Markings->save($marking);
-        return $this->redirect(['controller' => 'schedules', 'action' => 'agendar',$idc]);
+        if (MarkingsTable::att($idc, $ids)) {
+            return $this->redirect(['controller' => 'schedules', 'action' => 'agendar', $idc]);
+        }
+        else{
+            $this->Flash->error(__('Error, não foi possível atualizar a marcação'));
+        }
+    }
+
+    public function displayMarking(){
+
     }
 }

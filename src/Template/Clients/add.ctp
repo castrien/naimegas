@@ -5,7 +5,7 @@
     </ul>
 </nav>
 <div class="clients form large-9 medium-8 columns content">
-    <?= $this->Form->create($client) ?>
+    <?= $this->Form->create() ?>
     <fieldset>
         <legend><?= __('Cadastrar Cliente') ?></legend>
         <?php
